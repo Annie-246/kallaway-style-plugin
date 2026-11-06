@@ -1,0 +1,12 @@
+{
+  "name": "nhat-duong-plugins",
+  "owner": { "name": "Nhật Dương", "url": "https://github.com/Annie-246" },
+  "description": "Plugin Claude Code cho người làm video, chia sẻ bởi Nhật Dương.",
+  "plugins": [
+    {
+      "name": "kallaway-style",
+      "source": "./plugins/kallaway-style",
+      "description": "Dựng video dọc 9:16 talking-head theo style Kallaway bằng Remotion: minh hoạ neon vẽ riêng cho từng ý, thẻ người nói đầu nhô ra khỏi khung, caption một từ, nhạc ngắt trước reveal, thumbnail cùng style."
+    }
+  ]
+}

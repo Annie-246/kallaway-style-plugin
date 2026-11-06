@@ -1,0 +1,10 @@
+{
+  "name": "kallaway-style",
+  "displayName": "Kallaway Style",
+  "description": "Dựng video dọc 9:16 talking-head theo style Kallaway bằng Remotion: minh hoạ neon vẽ riêng cho từng ý, thẻ người nói đầu nhô ra khỏi khung, caption một từ, nhạc ngắt trước reveal, thumbnail cùng style.",
+  "author": { "name": "Nhật Dương", "url": "https://github.com/Annie-246" },
+  "homepage": "https://github.com/Annie-246/kallaway-style-plugin",
+  "repository": "https://github.com/Annie-246/kallaway-style-plugin",
+  "license": "MIT",
+  "keywords": ["video", "remotion", "motion-graphics", "talking-head", "shorts", "vietnamese"]
+}
