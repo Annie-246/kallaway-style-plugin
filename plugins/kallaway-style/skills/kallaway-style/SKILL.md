@@ -60,6 +60,8 @@ Style này **giải thích một ý tưởng bằng một vật thể đồ họ
 | `references/thumbnail.md` | làm thumbnail (composition `Thumb`, ví dụ `references/thumb-example.json`) |
 | `references/analysis-v1..v4.md` | phân tích sâu từng mẫu (mẫu 5 trùng file mẫu 3): công thức từng cảnh, danh mục hiệu ứng theo khung, bảng SFX. Số liệu đã được phản biện sửa ở `style-synthesis.md`, số đó thắng |
 
+**Cần có trên máy:** Node.js 18+, Python 3.10+, ffmpeg, và `pip install faster-whisper opencv-python pillow numpy rembg`. Thiếu gì thì báo người dùng cài trước khi dựng. Dữ liệu dựng luôn nằm trong thư mục video của người dùng, không ghi vào thư mục plugin.
+
 ## Quy trình
 
 **B1–B3 · Cắt thô & duyệt.** Cắt chặt hơn mặc định: khoảng lặng > 0,3 s đều bỏ, câu dính liền (khoảng nghỉ 0,15–0,35 s). Dùng công cụ cắt khoảng lặng bất kỳ (đặt ngưỡng lặng thấp); giữ quy tắc "ý cuối cùng" và đệm không nuốt chữ. Gửi mốc cắt cho người dùng duyệt **trước** khi dựng.
