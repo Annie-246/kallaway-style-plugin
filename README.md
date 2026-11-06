@@ -34,7 +34,7 @@ Khởi động lại Claude Code sau khi cài.
 Nếu không muốn chạy lệnh ở terminal, gõ lần lượt trong Claude Code:
 
 ```
-/plugin marketplace add Annie-246/kallaway-style-plugin
+/plugin marketplace add https://github.com/Annie-246/kallaway-style-plugin.git
 /plugin install kallaway-style@nhat-duong-plugins
 ```
 

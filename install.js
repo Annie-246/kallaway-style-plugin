@@ -6,7 +6,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const REPO = "Annie-246/kallaway-style-plugin";
+const URL_ = "https://github.com/Annie-246/kallaway-style-plugin.git"; // HTTPS: the owner/repo form clones over SSH and fails without SSH keys
 const MARKET = "nhat-duong-plugins";
 const PLUGIN = "kallaway-style";
 
@@ -19,7 +19,7 @@ try {
   process.exit(1);
 }
 
-run(`claude plugin marketplace add ${REPO}`);
+run(`claude plugin marketplace add ${URL_}`);
 run(`claude plugin install ${PLUGIN}@${MARKET}`);
 
 const file = path.join(process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), ".claude"), "settings.json");
@@ -36,7 +36,7 @@ if (fs.existsSync(file)) {
 settings.extraKnownMarketplaces ??= {};
 settings.extraKnownMarketplaces[MARKET] = {
   ...settings.extraKnownMarketplaces[MARKET],
-  source: { source: "github", repo: REPO },
+  source: { source: "git", url: URL_ },
   autoUpdate: true,
 };
 fs.mkdirSync(path.dirname(file), { recursive: true });
