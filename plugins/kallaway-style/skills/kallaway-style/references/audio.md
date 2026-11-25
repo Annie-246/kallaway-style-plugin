@@ -1,10 +1,14 @@
 # Âm thanh
 
+**KHÔNG NHẠC NỀN** (khoá cứng, chủ kênh chốt 25/11/2026: nghe phân tâm). Không đặt khoá `music` trong plan, tiếng chỉ gồm giọng và SFX. Luật này thay mọi luật nhạc trong tài liệu phân tích mẫu. Chỉ thêm nhạc khi người dùng yêu cầu rõ cho video đó.
+
 Số đo gốc: `references/precise-measurements.md` §4, §5. Luật cao nhất vẫn là L1–L23 trong `references/sfx-rules.md`.
 
 Tên loại tiếng trong file này suy ra từ phổ tần, không ai nghe trực tiếp. Mốc thời gian và mức dB là số đo.
 
 ## Kallaway làm gì
+
+Số đo từ video mẫu. Các dòng về nhạc chỉ để tra cứu, không áp dụng.
 
 | Việc | Số video | Dựng thế nào |
 |---|---|---|
@@ -29,13 +33,9 @@ Bốn video có bốn bảng tiếng khác nhau. Không có "bộ SFX Kallaway" 
 
 Chọn một bảng theo nội dung và giữ nguyên cả video (E9). Mặc định dùng bảng của v3: whoosh mềm cho chuyển động sân khấu.
 
-Cảnh FULL đầu tiên sau hook: v1 và v3 gần im hẳn, v2 và v4 còn lớp pluck rất nhỏ. Mặc định tắt hẳn bằng `drops`, vì `plan_skeleton` đã làm sẵn.
-
 ## Làm trong template
 
-- `prep_music.py` tách bài nhạc thành `music/rest.wav` (bass+other) và `music/drums.wav`.
-- `plan.music`: `rest` + `drums` + `volume` + `drops` + `drumsOnlyInSplit`.
-- Bài không có trống (pad): chỉ cần `src`, bỏ `drums`.
+- Chỉ khi người dùng yêu cầu nhạc: `plan.music` (`src` + `volume` + `drops`), hoặc tách 2 lớp bằng `prep_music.py`.
 - `plan.sfx[]` là thứ template phát. `dur` (giây, tuỳ chọn) cắt tiếng dứt khoát, dùng cho riser dừng chết.
 
 ## Quy trình SFX
@@ -47,7 +47,7 @@ Mỗi tiếng là một dòng trong `public/cues.json` (định dạng ở mục
 1. **Lấy mốc từ plan, không đoán.** Mốc animation có sẵn trong `plan.json`.
 2. **Lượt 1, whoosh.** Mỗi chuyển động sân khấu lớn (camera, morph, push, timeline lia) một whoosh. Đỉnh rơi vào frame nhanh nhất: `python "$S/motion_curve.py" out/draft.mp4 <đầu> <cuối>`.
 3. **Lượt 2, texture.** Chỉ cho sự kiện đáng nhấn: impact khi đồ hoạ lớn vào, không gõ theo từng chip (E1).
-4. **Lượt 3, riser.** Tối đa 3 riser, mỗi riser gắn một `drops` và dừng đúng frame nhạc tắt.
+4. **Lượt 3, riser.** Mặc định không dùng. Nếu cần nhấn câu chốt: tối đa 1 riser, dừng đúng frame cắt (L3).
 5. **Đo tiếng.** `python "$S/sfx_probe.py" <các biến thể>`, lấy `t_energy` làm `anchor_s`, `peak` làm `file_peak_db`.
 6. **Nhường giọng và nạp vào plan.** Chạy trong `public/`:
 
@@ -77,8 +77,8 @@ python "$S/cues_to_plan.py" --project ".."
 | Khung đầu (tiêu đề hook bật) | **L5** boom nhẹ | sub-boom tại frame 0, ≥6 dB dưới giọng | `big-boom-sub-drop`, `deep-bass-boom-cinematic` |
 | Push / camera bay lớn / thu vào điện thoại / đổi bố cục sân khấu | **L1** whoosh nhẹ | đỉnh ở frame nhanh nhất | `deep-swoosh` |
 | Đồ hoạ lớn vào, reveal lớn | **L4** impact vừa | tối đa 1–3 lần cả video | `bass-impact` |
-| Trước câu chốt | **L3 → L15** | riser 0,5–1 s dừng chết đúng lúc nhạc tắt | `cinematic-suspense-riser` với `trim_end_s` |
-| Cảnh FULL đầu tiên sau hook | **L15** | im nhạc (tối đa 2 lần L15/video, tính cả lần này) | — |
+| Trước câu chốt | **L3** (tuỳ chọn) | riser 0,5–1 s dừng chết đúng frame cắt, sau đó im | `cinematic-suspense-riser` với `trim_end_s` |
+| Cảnh FULL đầu tiên sau hook | **L15** | không đặt SFX | — |
 | Morph, clip/thẻ đổi chỗ, badge bay lên header | **L1** | whoosh dải rộng, mềm, 0,3–0,6 s, đỉnh giữa morph | `deep-swoosh` (cắt 0,6–2,2 s), một mẫu cho mọi morph |
 | Orbit bắt đầu quay / lưới reel bật | **L1** | một whoosh cho cả cụm (E1) | như trên |
 | Thanh tiến trình chạy | không (hoặc **L17** nếu là đếm số thật) | mẫu 4 để im | — |
@@ -88,7 +88,7 @@ python "$S/cues_to_plan.py" --project ".."
 
 Mẫu đo được 5–25 tiếng/phút (v1 ~5, v3 và v4 ~11–13, v2 ~25 trên 39 s). Guide giới hạn 3–6 điểm/phút ở đoạn nhiều phần tử. Giữ giới hạn của guide trừ khi người dùng đổi.
 
-Nguồn tải: **myinstants trước, ElevenLabs sau**. Dựng xong liệt kê SFX + mốc + mã luật + các khoảng im nhạc.
+Nguồn tải: **myinstants trước, ElevenLabs sau**. Dựng xong liệt kê SFX + mốc + mã luật.
 
 ### Quy tắc áp nguyên (`references/sfx-rules.md`)
 - **Một loại sự kiện = một loại tiếng** cho cả video (E9).
@@ -100,7 +100,6 @@ Nguồn tải: **myinstants trước, ElevenLabs sau**. Dựng xong liệt kê S
 
 ## Mức âm lượng
 - Giọng chuẩn hoá cuối −14 LUFS.
-- Nhạc rest khoảng −14…−20 dB dưới giọng; drums có thể to hơn rest 3–4 dB.
 - Whoosh −10…−12 dB, texture −6…−7 dB, riser −5 dB là mức trần. Mọi tiếng phải dưới giọng ít nhất 6 dB tại chỗ chồng lên lời.
 
 ## Hoàn thiện

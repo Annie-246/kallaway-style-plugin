@@ -1,6 +1,6 @@
 ---
 name: kallaway-style
-description: Dựng video dọc 9:16 talking-head theo style Kallaway — giải thích bằng motion graphic minh hoạ vẽ riêng cho từng ý (icon neon tự vẽ, hạt chảy, dâng màu, morph) trên nền đen chấm lưới / giấy kẻ sáng, thẻ người nói bo góc dưới đáy với đầu nhô ra khỏi khung (pop-out), caption một từ, tiêu đề sans đậm + serif nghiêng + hộp đỏ, biểu đồ tự vẽ, timeline lia, cây chip, lưới reel bằng chứng, CTA "Comment X to get the doc", cắt cứng xen cảnh mặt người ở câu chuyển ý, nhạc pad trầm ngắt trước reveal. Dựng bằng Remotion từ plan.json. Dùng khi người dùng nói "style Kallaway", "kiểu Kallaway", "kallaway-style", "dựng như mẫu Kallaway". Cũng dùng để phân tích thêm video mẫu Kallaway mới và bổ sung thư viện.
+description: Dựng video dọc 9:16 talking-head theo style Kallaway — giải thích bằng motion graphic minh hoạ vẽ riêng cho từng ý (icon neon tự vẽ, hạt chảy, dâng màu, morph) trên nền đen chấm lưới / giấy kẻ sáng, thẻ người nói bo góc dưới đáy với đầu nhô ra khỏi khung (pop-out), caption một từ, tiêu đề sans đậm + serif nghiêng + hộp đỏ, biểu đồ tự vẽ, timeline lia, cây chip, lưới reel bằng chứng, CTA "Comment X to get the doc", cắt cứng xen cảnh mặt người ở câu chuyển ý, không nhạc nền. Dựng bằng Remotion từ plan.json. Dùng khi người dùng nói "style Kallaway", "kiểu Kallaway", "kallaway-style", "dựng như mẫu Kallaway". Cũng dùng để phân tích thêm video mẫu Kallaway mới và bổ sung thư viện.
 ---
 
 # Kallaway style
@@ -12,7 +12,7 @@ Style này **giải thích một ý tưởng bằng một vật thể đồ họ
 3. **Hình đi trước lời 0,2 s**; đồ họa đổi mỗi 1–2 s; không bao giờ đứng yên (drift).
 4. **Lối vào = đèn neon bật** (nhấp nháy 6 khung) và **gõ chữ có mép nhấp nháy**. Chuyển động lớn vào nhanh, đuôi dài, không vượt đích. Không bounce, không pop scale, không flash.
 5. **Màu mang nghĩa**: đỏ = cũ/sai, magenta = mới/đúng/đang nói, vàng = hook/đỉnh, xám = nhả, xanh lá = chọn/thành công.
-6. **Âm thanh là công cụ dựng**: nhạc chạy đều, không hạ khi có giọng; tắt cắt chết dưới câu chốt trên mặt người, có riser dừng đúng lúc đó, vào lại ở cú cắt sau; SFX gắn với đồ hoạ đổi trạng thái, cắt thường về mặt người không có tiếng; nhạc chạy tới khung cuối.
+6. **KHÔNG NHẠC NỀN** (khoá cứng, chủ kênh chốt 25/11/2026: nghe phân tâm). Tiếng chỉ gồm giọng và SFX, không đặt khoá `music` trong plan. Chỉ thêm nhạc khi người dùng yêu cầu rõ cho video đó. SFX gắn với đồ hoạ đổi trạng thái, cắt thường về mặt người không có tiếng.
 7. **Cắt đổi bố cục 110 ms trước chữ đầu câu**; phụ đề 1 từ/lần, đổi đúng `word.s`; phụ đề FULL 68 px, SPLIT 60 px; tiêu đề line-height 0,92.
 
 ## Hai luật bắt buộc về hình (chủ kênh yêu cầu 27/10/2026)
@@ -54,7 +54,7 @@ Style này **giải thích một ý tưởng bằng một vật thể đồ họ
 | `references/pacing-and-structure.md` | lập plan — nhịp, ngữ pháp dựng, phân bổ thời lượng |
 | `references/motion-library.md` | chọn graphic cho từng câu (G1–G15), kỹ thuật chuyển động (M1–M5, T1–T6) |
 | `references/design-system.md` | bố cục đo pixel, màu, font, ánh sáng neon |
-| `references/audio.md` | nhạc, ngắt nhạc, ánh xạ sang luật SFX L1–L23 |
+| `references/audio.md` | không nhạc nền, ánh xạ sang luật SFX L1–L23 |
 | `references/sfx-rules.md` | bảng luật SFX L1–L23 và lỗi E1–E12: mọi tiếng phải trỏ về một sự kiện trong bảng |
 | `references/plan-schema.md` | viết `plan.json`; ví dụ chạy được: `references/plan-example.json` |
 | `references/thumbnail.md` | làm thumbnail (composition `Thumb`, ví dụ `references/thumb-example.json`) |
@@ -71,7 +71,7 @@ Style này **giải thích một ý tưởng bằng một vật thể đồ họ
 S="${CLAUDE_PLUGIN_ROOT}/skills/kallaway-style/scripts"
 python "$S/new_project.py"  --dest "<thư mục video>/kallaway"          # template + font + node_modules (junction)
 python "$S/prep_source.py"  --src "<bản đã cắt>.mp4" --project "<…>/kallaway" --lang vi   # cut.mp4, words.json, source.json (tâm mặt)
-python "$S/plan_skeleton.py" --project "<…>/kallaway"                  # plan.json nháp: bố cục + chỗ trống graphic + 2 điểm ngắt nhạc
+python "$S/plan_skeleton.py" --project "<…>/kallaway"                  # plan.json nháp: bố cục + chỗ trống graphic
 ```
 Đọc bảng in ra; sửa bố cục nếu câu chuyển ý bị xếp sai.
 
@@ -81,12 +81,7 @@ python "$S/plan_skeleton.py" --project "<…>/kallaway"                  # plan.
 3. Tiêu đề: ≤ 6 từ/dòng, 1–2 dòng, có đúng 1 điểm nhấn (serif / [đỏ] / {hộp đỏ}).
 4. Tư liệu thật (ảnh chụp app, reel, số liệu) → `public/media/`. Thiếu thì tìm/gom (tự chụp, tự tìm hoặc nhờ Claude gom) hoặc sinh ảnh Gemini; **không bịa số liệu** trên huy hiệu/biểu đồ.
 5. `captions.serif`: 3–8 cụm khái niệm then chốt.
-6. Nhạc vào `public/music/`. SFX làm sau khi hình đã chốt, theo 3 lượt trong `references/audio.md`.
-
-Nhạc 2 lớp (beat chỉ chơi khi có đồ họa):
-```bash
-python "$S/prep_music.py" --src "<bài nhạc>" --project "<…>/kallaway" --start 8 --dur 90
-```
+6. Không nhạc nền. SFX làm sau khi hình đã chốt, theo 3 lượt trong `references/audio.md`.
 
 Rồi tách người cho pop-out (chạy SAU khi plan có segment cuối cùng, vì chỉ xử lý khung SPLIT):
 ```bash
@@ -103,7 +98,7 @@ Render (đặt `TEMP`/`TMP` sang ổ còn trống, thêm `--timeout=120000`): `n
 
 **Chấm điểm sau render**: `python "$S/measure_craft.py" --video out/final.mp4 --plan public/plan.json --compare` — chỉ số WARN phải sửa hoặc giải thích khi bàn giao.
 
-**B6 · Bàn giao.** Báo: bảng segment (thời gian, bố cục, graphic), các khoảng ngắt nhạc (L15), danh sách SFX + mốc + mã luật, chỗ nào dùng tư liệu giả lập cần người dùng thay.
+**B6 · Bàn giao.** Báo: bảng segment (thời gian, bố cục, graphic), danh sách SFX + mốc + mã luật, chỗ nào dùng tư liệu giả lập cần người dùng thay.
 
 ## Checklist QC (xem contact sheet 4 fps của bản render)
 - [ ] Khung 0 có đồ họa + tiêu đề; không mở bằng mặt trơn.
@@ -115,7 +110,7 @@ Render (đặt `TEMP`/`TMP` sang ổ còn trống, thêm `--timeout=120000`): `n
 - [ ] Màu đúng nghĩa xuyên suốt video.
 - [ ] Không chữ/khung đứng yên nào ngoài x 140–940 (L-SAFE) — kiểm bằng contact sheet có kẻ 2 vạch.
 - [ ] Mọi thương hiệu trên hình đều có logo (L-LOGO); mọi khối SPLIT có hình thật archive.org đã duyệt (L-ILLUS); `sources.csv` khớp file đang dùng.
-- [ ] Nhạc nghe được trên loa điện thoại ở mức "cảm thấy", tắt hẳn ở điểm drop.
+- [ ] Không nhạc nền: `plan.json` không có khoá `music` (trừ khi người dùng yêu cầu nhạc).
 - [ ] fps: kiểm khung cuối sau render (bẫy fps: so số khung với thời lượng bằng ffprobe).
 
 ## Bẫy đã biết

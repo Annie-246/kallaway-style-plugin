@@ -5,7 +5,7 @@ Plugin giúp Claude Code dựng video dọc 9:16 kiểu Kallaway từ một vide
 - Minh hoạ neon vẽ riêng cho từng ý (icon tự vẽ, biểu đồ, timeline, morph)
 - Thẻ người nói bo góc dưới đáy, đầu nhô ra khỏi khung
 - Caption chạy theo từng chữ, tiêu đề sans đậm + serif nghiêng + hộp đỏ
-- Cắt cứng ở câu chuyển ý, nhạc ngắt trước điểm reveal, thumbnail cùng style
+- Cắt cứng ở câu chuyển ý, không nhạc nền, thumbnail cùng style
 
 Chia sẻ bởi **Nhật Dương** · [Facebook](https://www.facebook.com/nhatduong.vn) · [YouTube](https://www.youtube.com/@Under30vn) · [TikTok](https://www.tiktok.com/@nhatduong.vn)
 

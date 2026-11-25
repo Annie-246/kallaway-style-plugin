@@ -10,7 +10,6 @@ File nằm ở `public/plan.json` của dự án Remotion. Mọi thời gian là
               "w": 1080, "h": 1920, "face": {"x": 540, "y": 700}, "cardZoom": 1.0 },
   "words": [ {"s": 0.0, "e": 0.24, "w": "Lý"} ],
   "captions": { "serif": ["kịch bản", "hook"], "hide": [[12.0, 13.5]] },
-  "music": { "src": "music/bed.mp3", "volume": 0.14, "drops": [[3.0, 4.0]] },
   "sfx": [ {"src": "sfx/whoosh.mp3", "at": 13.1, "volume": 0.3, "rule": "L1", "dur": 0.6} ],
   "segments": [ ...xem dưới... ]
 }

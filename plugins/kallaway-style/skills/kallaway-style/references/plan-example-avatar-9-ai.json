@@ -680,16 +680,6 @@
   "hide": [],
   "splitY": 1085
  },
- "music": {
-  "src": "music/bed.mp3",
-  "volume": 0.12,
-  "drops": [
-   [
-    3.53,
-    8.66
-   ]
-  ]
- },
  "sfx": [
   {
    "src": "sfx/big-boom-sub-drop.mp3",

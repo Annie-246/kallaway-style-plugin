@@ -1,6 +1,6 @@
 """Draft plan.json from words.json + source.json using the Kallaway pacing grammar.
 
-  python plan_skeleton.py --project "<remotion project dir>" [--fps 30] [--music music/bed.mp3]
+  python plan_skeleton.py --project "<remotion project dir>" [--fps 30]
 
 What it decides (rules from references/pacing-and-structure.md):
   * sentence split on . ? ! or a pause > 0.35 s
@@ -10,7 +10,7 @@ What it decides (rules from references/pacing-and-structure.md):
   * consecutive split sentences merge into one segment (max ~18 s), one scene slot per sentence
   * full segments alternate punch-in zoom 1.0 / 1.18
   * the last split segment is the CTA (light theme, docgrid)
-  * music drops: the last ~1 s of the full segment right before the 2 biggest reveals (L15 cap = 2)
+  * no background music: plan has no "music" key (added only when the user asks for it)
 
 What it does NOT decide: the graphics. Every scene is {"type": "none", "todo": "<sentence>"};
 Claude replaces each with a real scene from references/motion-library.md.
@@ -42,7 +42,6 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", required=True)
     ap.add_argument("--fps", type=float, default=None)
-    ap.add_argument("--music", default="music/bed.mp3")
     a = ap.parse_args()
     pub = Path(a.project) / "public"
     words = json.loads((pub / "words.json").read_text(encoding="utf-8"))
@@ -107,20 +106,12 @@ def main():
             s["zoom"] = zoom
             zoom = 1.18 if zoom == 1.0 else 1.0
 
-    # 4) music drops before the two longest following split sections
-    cand = []
-    for i in range(len(fixed) - 1):
-        if fixed[i]["layout"] == "full" and fixed[i + 1]["layout"] == "split":
-            cand.append((fixed[i + 1]["end"] - fixed[i + 1]["start"], max(fixed[i]["start"], fixed[i]["end"] - 1.0), fixed[i]["end"]))
-    drops = [[round(a, 2), round(b, 2)] for _, a, b in sorted(cand, reverse=True)[:2]]
-
     plan = {
         "fps": fps,
         "duration": fixed[-1]["end"],
         "source": {"video": "source/cut.mp4", "w": src["w"], "h": src["h"], "face": src["face"], "cardZoom": 1.0},
         "words": words,
         "captions": {"serif": [], "hide": []},
-        "music": {"src": a.music, "volume": 0.14, "drops": sorted(drops)},
         "sfx": [],
         "segments": fixed,
     }

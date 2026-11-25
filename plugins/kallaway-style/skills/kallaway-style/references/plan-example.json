@@ -240,16 +240,6 @@
   ],
   "hide": []
  },
- "music": {
-  "src": null,
-  "volume": 0.14,
-  "drops": [
-   [
-    3.2,
-    3.7
-   ]
-  ]
- },
  "sfx": [],
  "segments": [
   {

@@ -1,4 +1,5 @@
-"""Split a music track into the two layers the Kallaway mix needs.
+"""Only when the user explicitly asks for music (default is no background music).
+Split a music track into the two layers the Kallaway mix needs.
 
   python prep_music.py --src "<track>.mp3" --project "<remotion project>" [--start 20] [--dur 90]
 

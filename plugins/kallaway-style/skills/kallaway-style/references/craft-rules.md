@@ -21,7 +21,7 @@ Cấu trúc giữ chân (lặp ở cả 4 mẫu):
 3. **Vòng mở** (open loop): báo trước số lượng ("2 bước", "8 nguyên tắc", "3 loại") ở 10–15 s đầu, trả dần đến gần cuối (mẫu 4: hứa "2 bước" ở 13 s, bước 2 tới 49,6 s). Người xem ở lại để nhận nốt.
 4. **Đổi hình thức mỗi 4–8 s**: chuỗi biểu đồ → mặt → thẻ clip → mặt → morph… không có hai khối liền nhau cùng một kiểu.
 5. **Khối bằng chứng thật** (reel, số liệu, ảnh chụp app) xuất hiện trước khi người xem kịp nghi ngờ (mẫu 3: ngay khung đầu; mẫu 2: 2,5 s).
-6. **Kết** trên đồ họa CTA hoặc một câu mặt người ngắn; nhạc chạy tới khung cuối không fade (3/4 mẫu), không outro.
+6. **Kết** trên đồ họa CTA hoặc một câu mặt người ngắn, không outro.
 
 ## 2. Khoảng cách (px trên khung 1080×1920, chỉ khung đồ họa)
 
